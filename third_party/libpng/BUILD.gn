@@ -7,6 +7,7 @@ import("../../gn/skia.gni")
 
 declare_args() {
   skia_use_system_libpng = is_official_build && !is_canvaskit
+  libpng_dir = "//third_party/externals/libpng"
 }
 
 import("../third_party.gni")
@@ -19,49 +20,49 @@ if (skia_use_system_libpng) {
   third_party("libpng") {
     public_include_dirs = [
       ".",
-      "../externals/libpng",
+      "$libpng_dir",
     ]
 
     defines = [ "PNG_SET_OPTION_SUPPORTED" ]
     deps = [ "//third_party/zlib" ]
     sources = [
-      "../externals/libpng/png.c",
-      "../externals/libpng/pngerror.c",
-      "../externals/libpng/pngget.c",
-      "../externals/libpng/pngmem.c",
-      "../externals/libpng/pngpread.c",
-      "../externals/libpng/pngread.c",
-      "../externals/libpng/pngrio.c",
-      "../externals/libpng/pngrtran.c",
-      "../externals/libpng/pngrutil.c",
-      "../externals/libpng/pngset.c",
-      "../externals/libpng/pngtrans.c",
-      "../externals/libpng/pngwio.c",
-      "../externals/libpng/pngwrite.c",
-      "../externals/libpng/pngwtran.c",
-      "../externals/libpng/pngwutil.c",
+      "$libpng_dir/png.c",
+      "$libpng_dir/pngerror.c",
+      "$libpng_dir/pngget.c",
+      "$libpng_dir/pngmem.c",
+      "$libpng_dir/pngpread.c",
+      "$libpng_dir/pngread.c",
+      "$libpng_dir/pngrio.c",
+      "$libpng_dir/pngrtran.c",
+      "$libpng_dir/pngrutil.c",
+      "$libpng_dir/pngset.c",
+      "$libpng_dir/pngtrans.c",
+      "$libpng_dir/pngwio.c",
+      "$libpng_dir/pngwrite.c",
+      "$libpng_dir/pngwtran.c",
+      "$libpng_dir/pngwutil.c",
     ]
 
     if (current_cpu == "arm" || current_cpu == "arm64") {
       sources += [
-        "../externals/libpng/arm/arm_init.c",
-        "../externals/libpng/arm/filter_neon_intrinsics.c",
-        "../externals/libpng/arm/palette_neon_intrinsics.c",
+        "$libpng_dir/arm/arm_init.c",
+        "$libpng_dir/arm/filter_neon_intrinsics.c",
+        "$libpng_dir/arm/palette_neon_intrinsics.c",
       ]
     }
 
     if (current_cpu == "x86" || current_cpu == "x64") {
       defines += [ "PNG_INTEL_SSE" ]
       sources += [
-        "../externals/libpng/intel/filter_sse2_intrinsics.c",
-        "../externals/libpng/intel/intel_init.c",
+        "$libpng_dir/intel/filter_sse2_intrinsics.c",
+        "$libpng_dir/intel/intel_init.c",
       ]
     }
 
     if (current_cpu == "loong64") {
       sources += [
-        "../externals/libpng/loongarch/filter_lsx_intrinsics.c",
-        "../externals/libpng/loongarch/loongarch_lsx_init.c",
+        "$libpng_dir/loongarch/filter_lsx_intrinsics.c",
+        "$libpng_dir/loongarch/loongarch_lsx_init.c",
       ]
     }
   }
