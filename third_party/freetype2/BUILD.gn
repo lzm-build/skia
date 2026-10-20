@@ -18,6 +18,7 @@ declare_args() {
   skia_use_freetype_svg = true
   skia_use_freetype_zlib = true
   skia_use_freetype_zlib_bundled = !skia_use_system_zlib
+  freetype2_dir = "//third_party/externals/freetype"
 }
 
 import("../third_party.gni")
@@ -49,7 +50,7 @@ if (skia_use_system_freetype2) {
       ]
       public_include_dirs += [ "include/freetype-android" ]
     }
-    public_include_dirs += [ "../externals/freetype/include" ]
+    public_include_dirs += [ "$freetype2_dir/include" ]
 
     if (skia_use_freetype_zlib) {
       public_defines += [ "FT_CONFIG_OPTION_USE_ZLIB" ]
@@ -65,38 +66,38 @@ if (skia_use_system_freetype2) {
     }
 
     sources = [
-      "../externals/freetype/src/autofit/autofit.c",
-      "../externals/freetype/src/base/ftbase.c",
-      "../externals/freetype/src/base/ftbbox.c",
-      "../externals/freetype/src/base/ftbitmap.c",
-      "../externals/freetype/src/base/ftdebug.c",
-      "../externals/freetype/src/base/ftfstype.c",
-      "../externals/freetype/src/base/ftgasp.c",
-      "../externals/freetype/src/base/ftglyph.c",
-      "../externals/freetype/src/base/ftinit.c",
-      "../externals/freetype/src/base/ftmm.c",
-      "../externals/freetype/src/base/ftpatent.c",
-      "../externals/freetype/src/base/ftstroke.c",
-      "../externals/freetype/src/base/ftsynth.c",
-      "../externals/freetype/src/base/ftsystem.c",
-      "../externals/freetype/src/base/fttype1.c",
-      "../externals/freetype/src/base/ftwinfnt.c",
-      "../externals/freetype/src/cff/cff.c",
-      "../externals/freetype/src/cid/type1cid.c",
-      "../externals/freetype/src/gzip/ftgzip.c",
-      "../externals/freetype/src/psaux/psaux.c",
-      "../externals/freetype/src/pshinter/pshinter.c",
-      "../externals/freetype/src/psnames/psnames.c",
-      "../externals/freetype/src/raster/raster.c",
-      "../externals/freetype/src/sfnt/sfnt.c",
-      "../externals/freetype/src/smooth/smooth.c",
-      "../externals/freetype/src/truetype/truetype.c",
-      "../externals/freetype/src/type1/type1.c",
+      "$freetype2_dir/src/autofit/autofit.c",
+      "$freetype2_dir/src/base/ftbase.c",
+      "$freetype2_dir/src/base/ftbbox.c",
+      "$freetype2_dir/src/base/ftbitmap.c",
+      "$freetype2_dir/src/base/ftdebug.c",
+      "$freetype2_dir/src/base/ftfstype.c",
+      "$freetype2_dir/src/base/ftgasp.c",
+      "$freetype2_dir/src/base/ftglyph.c",
+      "$freetype2_dir/src/base/ftinit.c",
+      "$freetype2_dir/src/base/ftmm.c",
+      "$freetype2_dir/src/base/ftpatent.c",
+      "$freetype2_dir/src/base/ftstroke.c",
+      "$freetype2_dir/src/base/ftsynth.c",
+      "$freetype2_dir/src/base/ftsystem.c",
+      "$freetype2_dir/src/base/fttype1.c",
+      "$freetype2_dir/src/base/ftwinfnt.c",
+      "$freetype2_dir/src/cff/cff.c",
+      "$freetype2_dir/src/cid/type1cid.c",
+      "$freetype2_dir/src/gzip/ftgzip.c",
+      "$freetype2_dir/src/psaux/psaux.c",
+      "$freetype2_dir/src/pshinter/pshinter.c",
+      "$freetype2_dir/src/psnames/psnames.c",
+      "$freetype2_dir/src/raster/raster.c",
+      "$freetype2_dir/src/sfnt/sfnt.c",
+      "$freetype2_dir/src/smooth/smooth.c",
+      "$freetype2_dir/src/truetype/truetype.c",
+      "$freetype2_dir/src/type1/type1.c",
     ]
 
     if (skia_use_freetype_svg) {
       public_defines += [ "FT_CONFIG_OPTION_SVG" ]
-      sources += [ "../externals/freetype/src/svg/svg.c" ]
+      sources += [ "$freetype2_dir/src/svg/svg.c" ]
     }
   }
 }
