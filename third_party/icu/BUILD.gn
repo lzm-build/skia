@@ -18,7 +18,7 @@ if (skia_use_system_icu) {
   } else {
     data_assembly = "$target_gen_dir/icudtl_dat.S"
   }
-  data_dir = "../externals/icu/"
+  data_dir = "$icu_dir"
   if (target_cpu == "wasm") {
     # Use a super super super stripped down version for wasm,
     # which is the same thing flutter is using.
@@ -43,7 +43,7 @@ if (skia_use_system_icu) {
         rebase_path(data_assembly, root_build_dir),
       ]
     } else {
-      script = "../externals/icu/scripts/make_data_assembly.py"
+      script = "$icu_dir/scripts/make_data_assembly.py"
       inputs = [ "$data_dir/icudtl.dat" ]
       outputs = [ "$data_assembly" ]
       args = [
@@ -58,16 +58,16 @@ if (skia_use_system_icu) {
 
   third_party("headers") {
     public_include_dirs = [
-      "../externals/icu/source/common",
-      "../externals/icu/source/i18n",
+      "$icu_dir/source/common",
+      "$icu_dir/source/i18n",
       ".",
     ]
   }
 
   third_party("icu") {
     public_include_dirs = [
-      "../externals/icu/source/common",
-      "../externals/icu/source/i18n",
+      "$icu_dir/source/common",
+      "$icu_dir/source/i18n",
       ".",
     ]
     public_defines = [ "SK_USING_THIRD_PARTY_ICU" ]
@@ -102,7 +102,7 @@ if (skia_use_system_icu) {
       ]
       libs = [ "Advapi32.lib" ]
       sources += [
-        "../externals/icu/source/stubdata/stubdata.cpp",
+        "$icu_dir/source/stubdata/stubdata.cpp",
         "SkLoadICU.cpp",
       ]
     } else {
@@ -112,7 +112,7 @@ if (skia_use_system_icu) {
   }
 
   copy("icudata") {
-    sources = [ "../externals/icu/common/icudtl.dat" ]
+    sources = [ "$icu_dir/common/icudtl.dat" ]
     outputs = [ "$root_out_dir/icudtl.dat" ]
     data = [ "$root_out_dir/icudtl.dat" ]
   }
