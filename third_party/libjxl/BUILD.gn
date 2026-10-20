@@ -2,7 +2,11 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-import("../externals/libjxl/lib/lib.gni")
+declare_args() {
+  libjxl_dir = "//third_party/externals/libjxl"
+}
+
+import("$libjxl_dir/lib/lib.gni")
 import("../third_party.gni")
 
 third_party("libjxl") {
@@ -15,11 +19,11 @@ third_party("libjxl") {
   public_include_dirs = [
     ".",
     "include",
-    "../externals/libjxl/lib/include",
+    "$libjxl_dir/lib/include",
   ]
 
   include_dirs = [
-    "../externals/libjxl",
+    "$libjxl_dir",
     "../../modules/skcms",
   ]
 
@@ -32,7 +36,7 @@ third_party("libjxl") {
     defines += [ "JXL_DEBUG_ON_ABORT=0" ]
   }
 
-  _lib = "../externals/libjxl/lib"
+  _lib = "$libjxl_dir/lib"
   sources = []
   foreach(src, libjxl_base_sources) {
     sources += [ "$_lib/$src" ]
