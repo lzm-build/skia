@@ -5,11 +5,12 @@
 
 import("../../gn/skia.gni")
 import("../third_party.gni")
+import("../icu/icu.gni")
 
 third_party("icu_bidi") {
   public_include_dirs = [
-    "../externals/icu/source/common",
-    "../externals/icu/source/i18n",
+    "$icu_dir/source/common",
+    "$icu_dir/source/i18n",
   ]
   public_defines = [ "SK_USING_THIRD_PARTY_ICU" ]
   defines = [
@@ -23,7 +24,7 @@ third_party("icu_bidi") {
     "U_HAVE_LIB_SUFFIX=1",
     "U_LIB_SUFFIX_C_NAME=_skia",
   ]
-  _src = "../externals/icu/source"
+  _src = "$icu_dir/source"
   sources = [
     "$_src/common/cmemory.cpp",
     "$_src/common/cstring.cpp",
