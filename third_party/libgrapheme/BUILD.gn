@@ -7,6 +7,8 @@ import("../third_party.gni")
 
 declare_args() {
   UNICODE_VERSION = "15.0.0"
+  libgrapheme_dir = "//third_party/externals/libgrapheme"
+  unicodetools_dir = "//third_party/externals/unicodetools"
 }
 
 config("c99") {
@@ -23,7 +25,7 @@ config("c99") {
 if (current_toolchain == "//gn/toolchain:$host_toolchain") {
   copy("copy_unicode_data") {
     unicode_tools_dir =
-        "../externals/unicodetools/unicodetools/data/ucd/$UNICODE_VERSION"
+        "$unicodetools_dir/unicodetools/data/ucd/$UNICODE_VERSION"
     sources = [
       "$unicode_tools_dir/BidiBrackets.txt",
       "$unicode_tools_dir/BidiCharacterTest.txt",
@@ -55,32 +57,32 @@ if (current_toolchain == "//gn/toolchain:$host_toolchain") {
         deps += invoker.deps
       }
       configs += [ ":c99" ]
-      sources += [ "../externals/libgrapheme/gen/util.c" ]
+      sources += [ "$libgrapheme_dir/gen/util.c" ]
     }
   }
 
   compile_tool("bidirectional") {
-    sources = [ "../externals/libgrapheme/gen/bidirectional.c" ]
+    sources = [ "$libgrapheme_dir/gen/bidirectional.c" ]
   }
 
   compile_tool("case") {
-    sources = [ "../externals/libgrapheme/gen/case.c" ]
+    sources = [ "$libgrapheme_dir/gen/case.c" ]
   }
 
   compile_tool("character") {
-    sources = [ "../externals/libgrapheme/gen/character.c" ]
+    sources = [ "$libgrapheme_dir/gen/character.c" ]
   }
 
   compile_tool("line") {
-    sources = [ "../externals/libgrapheme/gen/line.c" ]
+    sources = [ "$libgrapheme_dir/gen/line.c" ]
   }
 
   compile_tool("sentence") {
-    sources = [ "../externals/libgrapheme/gen/sentence.c" ]
+    sources = [ "$libgrapheme_dir/gen/sentence.c" ]
   }
 
   compile_tool("word") {
-    sources = [ "../externals/libgrapheme/gen/word.c" ]
+    sources = [ "$libgrapheme_dir/gen/word.c" ]
   }
 
   # Run an executable that will produce a header
@@ -94,7 +96,7 @@ if (current_toolchain == "//gn/toolchain:$host_toolchain") {
           root_build_dir),
       rebase_path("$root_gen_dir/third_party/libgrapheme", root_build_dir),
     ]
-    _src = "../externals/libgrapheme/gen"
+    _src = "$libgrapheme_dir/gen"
     sources = [
       "$_src/bidirectional.c",
       "$_src/case.c",
@@ -135,8 +137,8 @@ source_set("headers") {
 }
 
 third_party("libgrapheme") {
-  public_include_dirs = [ "../externals/libgrapheme" ]
-  _src = "../externals/libgrapheme/src"
+  public_include_dirs = [ "$libgrapheme_dir" ]
+  _src = "$libgrapheme_dir/src"
 
   configs = [
     ":c99",
