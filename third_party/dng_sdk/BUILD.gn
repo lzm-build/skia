@@ -5,7 +5,7 @@
 # The Adobe DNG SDK, an API for reading and writing DNG files.
 
 declare_args() {
-    dng_sdk_dir = "//third_party/externals/dng_sdk"
+  dng_sdk_dir = "//third_party/externals/dng_sdk"
 }
 
 import("../third_party.gni")
