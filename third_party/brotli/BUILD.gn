@@ -5,20 +5,24 @@
 
 import("../third_party.gni")
 
+declare_args() {
+  brotli_dir = "//third_party/externals/brotli"
+}
+
 third_party("brotli") {
-  public_include_dirs = [ "../externals/brotli/c/include" ]
+  public_include_dirs = [ "$brotli_dir/c/include" ]
 
   # Brotli is used by freetype and libjxl; they only need to decode brotli.
   sources = [
-    "../externals/brotli/c/common/constants.c",
-    "../externals/brotli/c/common/context.c",
-    "../externals/brotli/c/common/dictionary.c",
-    "../externals/brotli/c/common/platform.c",
-    "../externals/brotli/c/common/shared_dictionary.c",
-    "../externals/brotli/c/common/transform.c",
-    "../externals/brotli/c/dec/bit_reader.c",
-    "../externals/brotli/c/dec/decode.c",
-    "../externals/brotli/c/dec/huffman.c",
-    "../externals/brotli/c/dec/state.c",
+    "$brotli_dir/c/common/constants.c",
+    "$brotli_dir/c/common/context.c",
+    "$brotli_dir/c/common/dictionary.c",
+    "$brotli_dir/c/common/platform.c",
+    "$brotli_dir/c/common/shared_dictionary.c",
+    "$brotli_dir/c/common/transform.c",
+    "$brotli_dir/c/dec/bit_reader.c",
+    "$brotli_dir/c/dec/decode.c",
+    "$brotli_dir/c/dec/huffman.c",
+    "$brotli_dir/c/dec/state.c",
   ]
 }
