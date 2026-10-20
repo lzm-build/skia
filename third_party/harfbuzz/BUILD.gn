@@ -8,6 +8,7 @@ import("../third_party.gni")
 
 declare_args() {
   skia_use_system_harfbuzz = is_official_build && !is_canvaskit
+  harfbuzz_dir = "//third_party/externals/harfbuzz"
 }
 
 if (skia_use_system_harfbuzz) {
@@ -20,7 +21,7 @@ if (skia_use_system_harfbuzz) {
   }
 } else {
   third_party("harfbuzz") {
-    _src = "../externals/harfbuzz/src"
+    _src = "$harfbuzz_dir/src"
     public_include_dirs = [
       ".",
       _src,
