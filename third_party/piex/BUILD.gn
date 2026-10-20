@@ -4,21 +4,22 @@
 # found in the LICENSE file.
 
 declare_args() {
+  piex_dir = "//third_party/externals/piex"
 }
 
 import("../third_party.gni")
 
 third_party("piex") {
-  public_include_dirs = [ "../externals/piex" ]
+  public_include_dirs = [ "$piex_dir" ]
 
   defines = [ "BREAK_IF_DEBUGGING_AND_OUT_OF_RANGE" ]
 
   sources = [
-    "../externals/piex/src/binary_parse/cached_paged_byte_array.cc",
-    "../externals/piex/src/binary_parse/range_checked_byte_ptr.cc",
-    "../externals/piex/src/image_type_recognition/image_type_recognition_lite.cc",
-    "../externals/piex/src/piex.cc",
-    "../externals/piex/src/tiff_directory/tiff_directory.cc",
-    "../externals/piex/src/tiff_parser.cc",
+    "$piex_dir/src/binary_parse/cached_paged_byte_array.cc",
+    "$piex_dir/src/binary_parse/range_checked_byte_ptr.cc",
+    "$piex_dir/src/image_type_recognition/image_type_recognition_lite.cc",
+    "$piex_dir/src/piex.cc",
+    "$piex_dir/src/tiff_directory/tiff_directory.cc",
+    "$piex_dir/src/tiff_parser.cc",
   ]
 }
