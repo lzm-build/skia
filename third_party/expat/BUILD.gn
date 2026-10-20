@@ -5,6 +5,7 @@
 
 declare_args() {
   skia_use_system_expat = is_official_build
+  expat_dir = "//third_party/externals/expat"
 }
 
 import("../third_party.gni")
@@ -15,12 +16,12 @@ if (skia_use_system_expat) {
   }
 } else {
   third_party("expat") {
-    _src = "../externals/expat"
+    _src = "$expat_dir"
 
     public_defines = [ "XML_STATIC" ]
 
     public_include_dirs = [
-      "../externals/expat/expat/lib",
+      "$expat_dir/expat/lib",
       "include/expat_config",
     ]
 
