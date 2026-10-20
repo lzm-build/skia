@@ -1,11 +1,13 @@
 import("../third_party.gni")
 
-spirv_cross = "//third_party/externals/spirv-cross"
+declare_args() {
+  spirv_cross_dir = "//third_party/externals/spirv-cross"
+}
 
 third_party("spirv_cross") {
   public_include_dirs = [
-    "//third_party/externals",
-    "//third_party/externals/spirv-cross",
+    get_path_info(spirv_cross_dir, "dir"),
+    spirv_cross_dir,
   ]
   public_defines = [ "SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS" ]
 
@@ -33,5 +35,5 @@ third_party("spirv_cross") {
                           "spirv_reflect.hpp",
                         ],
                         ".",
-                        "${spirv_cross}")
+                        spirv_cross_dir)
 }
