@@ -4,12 +4,13 @@
 # found in the LICENSE file.
 
 declare_args() {
+    d3d12_memory_allocator_dir = "//third_party/externals/d3d12allocator"
 }
 
 import("../third_party.gni")
 
 third_party("d3d12allocator") {
-  public_include_dirs = [ "../externals/d3d12allocator/src" ]
+  public_include_dirs = [ "$d3d12_memory_allocator_dir/src" ]
 
-  sources = [ "../externals/d3d12allocator/src/D3D12MemAlloc.cpp" ]
+  sources = [ "$d3d12_memory_allocator_dir/src/D3D12MemAlloc.cpp" ]
 }
