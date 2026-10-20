@@ -4,6 +4,10 @@
 
 import("../third_party.gni")
 
+declare_args() {
+  libavif_dir = "//third_party/externals/libavif"
+}
+
 third_party("libavif") {
   deps = [
     "//third_party/libgav1",
@@ -12,10 +16,10 @@ third_party("libavif") {
 
   public_include_dirs = [
     ".",
-    "../externals/libavif/include",
+    "$libavif_dir/include",
   ]
 
-  include_dirs = [ "../externals/libavif" ]
+  include_dirs = [ "$libavif_dir" ]
 
   defines = [
     "AVIF_CODEC_LIBGAV1=1",
@@ -23,24 +27,24 @@ third_party("libavif") {
   ]
 
   sources = [
-    "../externals/libavif/src/alpha.c",
-    "../externals/libavif/src/avif.c",
-    "../externals/libavif/src/codec_libgav1.c",
-    "../externals/libavif/src/colr.c",
-    "../externals/libavif/src/diag.c",
-    "../externals/libavif/src/exif.c",
-    "../externals/libavif/src/gainmap.c",
-    "../externals/libavif/src/io.c",
-    "../externals/libavif/src/mem.c",
-    "../externals/libavif/src/obu.c",
-    "../externals/libavif/src/rawdata.c",
-    "../externals/libavif/src/read.c",
-    "../externals/libavif/src/reformat.c",
-    "../externals/libavif/src/reformat_libsharpyuv.c",
-    "../externals/libavif/src/reformat_libyuv.c",
-    "../externals/libavif/src/scale.c",
-    "../externals/libavif/src/stream.c",
-    "../externals/libavif/src/utils.c",
-    "../externals/libavif/src/write.c",
+    "$libavif_dir/src/alpha.c",
+    "$libavif_dir/src/avif.c",
+    "$libavif_dir/src/codec_libgav1.c",
+    "$libavif_dir/src/colr.c",
+    "$libavif_dir/src/diag.c",
+    "$libavif_dir/src/exif.c",
+    "$libavif_dir/src/gainmap.c",
+    "$libavif_dir/src/io.c",
+    "$libavif_dir/src/mem.c",
+    "$libavif_dir/src/obu.c",
+    "$libavif_dir/src/rawdata.c",
+    "$libavif_dir/src/read.c",
+    "$libavif_dir/src/reformat.c",
+    "$libavif_dir/src/reformat_libsharpyuv.c",
+    "$libavif_dir/src/reformat_libyuv.c",
+    "$libavif_dir/src/scale.c",
+    "$libavif_dir/src/stream.c",
+    "$libavif_dir/src/utils.c",
+    "$libavif_dir/src/write.c",
   ]
 }
