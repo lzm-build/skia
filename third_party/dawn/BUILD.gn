@@ -34,8 +34,8 @@ if (is_win) {
 config("tint_api_config") {
   if (!is_canvaskit) {
     include_dirs = [
-      "../externals/dawn",
-      "../externals/dawn/include",
+      "$dawn_dir",
+      "$dawn_dir/include",
     ]
   } else {
     # Emscripten includes its own WebGPU headers.
@@ -134,8 +134,8 @@ group("tint") {
 config("dawn_api_config") {
   if (!is_canvaskit) {
     include_dirs = [
-      "../externals/dawn",
-      "../externals/dawn/include",
+      "$dawn_dir",
+      "$dawn_dir/include",
       "$target_gen_dir/include",
     ]
   } else {
