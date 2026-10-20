@@ -5,11 +5,15 @@
 
 import("../third_party.gni")
 
+declare_args() {
+  highway_dir = "//third_party/externals/highway"
+}
+
 third_party("highway") {
-  public_include_dirs = [ "../externals/highway" ]
+  public_include_dirs = [ "$highway_dir" ]
 
   sources = [
-    "../externals/highway/hwy/aligned_allocator.cc",
-    "../externals/highway/hwy/targets.cc",
+    "$highway_dir/hwy/aligned_allocator.cc",
+    "$highway_dir/hwy/targets.cc",
   ]
 }
