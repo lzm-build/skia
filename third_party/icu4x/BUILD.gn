@@ -6,6 +6,10 @@
 import("../../gn/skia.gni")
 import("../third_party.gni")
 
+declare_args() {
+  icu4x_dir = "//third_party/externals/icu4x"
+}
+
 bazel_args = []
 
 action("compile_icu4x_rust") {
@@ -24,8 +28,8 @@ action("compile_icu4x_rust") {
 
 third_party("icu4x") {
   public_include_dirs = [
-    "../externals/icu4x/ffi/capi/cpp/include",
-    "../externals/icu4x/ffi/capi/c/include",
+    "$icu4x_dir/ffi/capi/cpp/include",
+    "$icu4x_dir/ffi/capi/c/include",
   ]
 
   libs = [
