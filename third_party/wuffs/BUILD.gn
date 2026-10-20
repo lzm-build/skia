@@ -5,8 +5,12 @@
 
 import("../third_party.gni")
 
+declare_args() {
+  wuffs_dir = "//third_party/externals/wuffs"
+}
+
 third_party("wuffs") {
-  public_include_dirs = [ "../externals/wuffs/release/c" ]
+  public_include_dirs = [ "$wuffs_dir/release/c" ]
 
   defines = [
     # Copy/pasting from "../externals/wuffs/release/c/wuffs-*.c":
@@ -45,5 +49,5 @@ third_party("wuffs") {
     "WUFFS_CONFIG__MODULE__LZW",
   ]
 
-  sources = [ "../externals/wuffs/release/c/wuffs-v0.3.c" ]
+  sources = [ "$wuffs_dir/release/c/wuffs-v0.3.c" ]
 }
