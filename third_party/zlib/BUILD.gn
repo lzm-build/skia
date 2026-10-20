@@ -6,6 +6,10 @@
 import("../third_party.gni")
 import("zlib.gni")
 
+declare_args() {
+  zlib_dir = "//third_party/externals/zlib"
+}
+
 if (skia_use_system_zlib) {
   system("zlib") {
     libs = [ "z" ]
@@ -17,15 +21,15 @@ if (skia_use_system_zlib) {
   source_set("zlib_common_headers") {
     visibility = [ ":*" ]
     sources = [
-      "../externals/zlib/chromeconf.h",
-      "../externals/zlib/deflate.h",
-      "../externals/zlib/inffast.h",
-      "../externals/zlib/inffixed.h",
-      "../externals/zlib/inflate.h",
-      "../externals/zlib/inftrees.h",
-      "../externals/zlib/zconf.h",
-      "../externals/zlib/zlib.h",
-      "../externals/zlib/zutil.h",
+      "$zlib_dir/chromeconf.h",
+      "$zlib_dir/deflate.h",
+      "$zlib_dir/inffast.h",
+      "$zlib_dir/inffixed.h",
+      "$zlib_dir/inflate.h",
+      "$zlib_dir/inftrees.h",
+      "$zlib_dir/zconf.h",
+      "$zlib_dir/zlib.h",
+      "$zlib_dir/zutil.h",
     ]
   }
 
@@ -54,8 +58,8 @@ if (skia_use_system_zlib) {
 
     if (use_x86_x64_optimizations) {
       sources = [
-        "../externals/zlib/adler32_simd.c",
-        "../externals/zlib/adler32_simd.h",
+        "$zlib_dir/adler32_simd.c",
+        "$zlib_dir/adler32_simd.h",
       ]
 
       if (!is_win || is_clang) {
@@ -65,8 +69,8 @@ if (skia_use_system_zlib) {
 
     if (use_arm_neon_optimizations) {
       sources = [
-        "../externals/zlib/adler32_simd.c",
-        "../externals/zlib/adler32_simd.h",
+        "$zlib_dir/adler32_simd.c",
+        "$zlib_dir/adler32_simd.h",
       ]
     }
 
@@ -99,8 +103,8 @@ if (skia_use_system_zlib) {
       visibility = [ ":*" ]
 
       include_dirs = [
-        "../externals/zlib/",
-        "../externals/zlib/contrib/optimizations/",
+        "$zlib_dir/",
+        "$zlib_dir/contrib/optimizations/",
       ]
 
       if (!is_win && !is_clang) {
@@ -108,8 +112,8 @@ if (skia_use_system_zlib) {
       }
 
       sources = [
-        "../externals/zlib/crc32_simd.c",
-        "../externals/zlib/crc32_simd.h",
+        "$zlib_dir/crc32_simd.c",
+        "$zlib_dir/crc32_simd.h",
       ]
 
       configs += [ ":zlib_internal_config" ]
@@ -143,14 +147,14 @@ if (skia_use_system_zlib) {
 
     if (use_x86_x64_optimizations || use_arm_neon_optimizations) {
       include_dirs = [
-        "../externals/zlib/",
-        "../externals/zlib/contrib/optimizations/",
+        "$zlib_dir/",
+        "$zlib_dir/contrib/optimizations/",
       ]
       sources = [
-        "../externals/zlib/contrib/optimizations/chunkcopy.h",
-        "../externals/zlib/contrib/optimizations/inffast_chunk.c",
-        "../externals/zlib/contrib/optimizations/inffast_chunk.h",
-        "../externals/zlib/contrib/optimizations/inflate.c",
+        "$zlib_dir/contrib/optimizations/chunkcopy.h",
+        "$zlib_dir/contrib/optimizations/inffast_chunk.c",
+        "$zlib_dir/contrib/optimizations/inffast_chunk.h",
+        "$zlib_dir/contrib/optimizations/inflate.c",
       ]
     }
 
@@ -173,9 +177,9 @@ if (skia_use_system_zlib) {
 
     if (use_x86_x64_optimizations) {
       sources = [
-        "../externals/zlib/crc32_simd.c",
-        "../externals/zlib/crc32_simd.h",
-        "../externals/zlib/crc_folding.c",
+        "$zlib_dir/crc32_simd.c",
+        "$zlib_dir/crc32_simd.h",
+        "$zlib_dir/crc_folding.c",
       ]
 
       if (!is_win || is_clang) {
@@ -207,11 +211,11 @@ if (skia_use_system_zlib) {
     visibility = [ ":*" ]
 
     if (use_x86_x64_optimizations) {
-      sources = [ "../externals/zlib/slide_hash_simd.h" ]
+      sources = [ "$zlib_dir/slide_hash_simd.h" ]
     }
 
     if (use_arm_neon_optimizations) {
-      sources = [ "../externals/zlib/slide_hash_simd.h" ]
+      sources = [ "$zlib_dir/slide_hash_simd.h" ]
     }
 
     configs += [ ":zlib_internal_config" ]
@@ -231,41 +235,41 @@ if (skia_use_system_zlib) {
   }
 
   third_party("zlib") {
-    public_include_dirs = [ "../externals/zlib" ]
+    public_include_dirs = [ "$zlib_dir" ]
     defines = []
     deps = []
     configs = []
 
     sources = [
-      "../externals/zlib/adler32.c",
-      "../externals/zlib/chromeconf.h",
-      "../externals/zlib/compress.c",
-      "../externals/zlib/contrib/optimizations/insert_string.h",
-      "../externals/zlib/cpu_features.c",
-      "../externals/zlib/cpu_features.h",
-      "../externals/zlib/crc32.c",
-      "../externals/zlib/crc32.h",
-      "../externals/zlib/deflate.c",
-      "../externals/zlib/deflate.h",
-      "../externals/zlib/gzclose.c",
-      "../externals/zlib/gzguts.h",
-      "../externals/zlib/gzlib.c",
-      "../externals/zlib/gzread.c",
-      "../externals/zlib/gzwrite.c",
-      "../externals/zlib/infback.c",
-      "../externals/zlib/inffast.c",
-      "../externals/zlib/inffast.h",
-      "../externals/zlib/inffixed.h",
-      "../externals/zlib/inflate.h",
-      "../externals/zlib/inftrees.c",
-      "../externals/zlib/inftrees.h",
-      "../externals/zlib/trees.c",
-      "../externals/zlib/trees.h",
-      "../externals/zlib/uncompr.c",
-      "../externals/zlib/zconf.h",
-      "../externals/zlib/zlib.h",
-      "../externals/zlib/zutil.c",
-      "../externals/zlib/zutil.h",
+      "$zlib_dir/adler32.c",
+      "$zlib_dir/chromeconf.h",
+      "$zlib_dir/compress.c",
+      "$zlib_dir/contrib/optimizations/insert_string.h",
+      "$zlib_dir/cpu_features.c",
+      "$zlib_dir/cpu_features.h",
+      "$zlib_dir/crc32.c",
+      "$zlib_dir/crc32.h",
+      "$zlib_dir/deflate.c",
+      "$zlib_dir/deflate.h",
+      "$zlib_dir/gzclose.c",
+      "$zlib_dir/gzguts.h",
+      "$zlib_dir/gzlib.c",
+      "$zlib_dir/gzread.c",
+      "$zlib_dir/gzwrite.c",
+      "$zlib_dir/infback.c",
+      "$zlib_dir/inffast.c",
+      "$zlib_dir/inffast.h",
+      "$zlib_dir/inffixed.h",
+      "$zlib_dir/inflate.h",
+      "$zlib_dir/inftrees.c",
+      "$zlib_dir/inftrees.h",
+      "$zlib_dir/trees.c",
+      "$zlib_dir/trees.h",
+      "$zlib_dir/uncompr.c",
+      "$zlib_dir/zconf.h",
+      "$zlib_dir/zlib.h",
+      "$zlib_dir/zutil.c",
+      "$zlib_dir/zutil.h",
     ]
 
     if (is_android) {
@@ -289,7 +293,7 @@ if (skia_use_system_zlib) {
         deps += [ ":zlib_arm_crc32" ]
       }
     } else {
-      sources += [ "../externals/zlib/inflate.c" ]
+      sources += [ "$zlib_dir/inflate.c" ]
     }
 
     configs += [
@@ -306,10 +310,10 @@ config("zlib_config") {
 
 third_party("compression_utils_portable") {
   visibility = [ "//third_party/externals/angle2:*" ]
-  public_include_dirs = [ "../externals/zlib/google" ]
+  public_include_dirs = [ "$zlib_dir/google" ]
   sources = [
-    "../externals/zlib/google/compression_utils_portable.cc",
-    "../externals/zlib/google/compression_utils_portable.h",
+    "$zlib_dir/google/compression_utils_portable.cc",
+    "$zlib_dir/google/compression_utils_portable.h",
   ]
   public_deps = [ ":zlib" ]  # either system or from source
 }
