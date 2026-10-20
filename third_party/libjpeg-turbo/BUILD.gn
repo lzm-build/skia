@@ -7,6 +7,7 @@ import("../../gn/skia.gni")
 
 declare_args() {
   skia_use_system_libjpeg_turbo = is_official_build && !is_canvaskit
+  libjpeg_turbo_dir = "//third_party/externals/libjpeg-turbo"
 }
 
 import("../third_party.gni")
@@ -18,12 +19,12 @@ if (skia_use_system_libjpeg_turbo) {
 } else {
   source_set("libjpeg_headers") {
     sources = [
-      "../externals/libjpeg-turbo/src/jconfig.h",
-      "../externals/libjpeg-turbo/src/jdct.h",
-      "../externals/libjpeg-turbo/src/jinclude.h",
-      "../externals/libjpeg-turbo/src/jmorecfg.h",
-      "../externals/libjpeg-turbo/src/jpeglib.h",
-      "../externals/libjpeg-turbo/src/jpeglibmangler.h",
+      "$libjpeg_turbo_dir/src/jconfig.h",
+      "$libjpeg_turbo_dir/src/jdct.h",
+      "$libjpeg_turbo_dir/src/jinclude.h",
+      "$libjpeg_turbo_dir/src/jmorecfg.h",
+      "$libjpeg_turbo_dir/src/jpeglib.h",
+      "$libjpeg_turbo_dir/src/jpeglibmangler.h",
     ]
   }
 
@@ -37,70 +38,70 @@ if (skia_use_system_libjpeg_turbo) {
   # jpeg_read_scanlines).
 
   libjpeg16_sources = [
-    "../externals/libjpeg-turbo/src/jcapistd.c",
-    "../externals/libjpeg-turbo/src/jccolor.c",
-    "../externals/libjpeg-turbo/src/jcdiffct.c",
-    "../externals/libjpeg-turbo/src/jclossls.c",
-    "../externals/libjpeg-turbo/src/jcmainct.c",
-    "../externals/libjpeg-turbo/src/jcprepct.c",
-    "../externals/libjpeg-turbo/src/jcsample.c",
-    "../externals/libjpeg-turbo/src/jdapistd.c",
-    "../externals/libjpeg-turbo/src/jdcolor.c",
-    "../externals/libjpeg-turbo/src/jddiffct.c",
-    "../externals/libjpeg-turbo/src/jdlossls.c",
-    "../externals/libjpeg-turbo/src/jdmainct.c",
-    "../externals/libjpeg-turbo/src/jdpostct.c",
-    "../externals/libjpeg-turbo/src/jdsample.c",
-    "../externals/libjpeg-turbo/src/jutils.c",
+    "$libjpeg_turbo_dir/src/jcapistd.c",
+    "$libjpeg_turbo_dir/src/jccolor.c",
+    "$libjpeg_turbo_dir/src/jcdiffct.c",
+    "$libjpeg_turbo_dir/src/jclossls.c",
+    "$libjpeg_turbo_dir/src/jcmainct.c",
+    "$libjpeg_turbo_dir/src/jcprepct.c",
+    "$libjpeg_turbo_dir/src/jcsample.c",
+    "$libjpeg_turbo_dir/src/jdapistd.c",
+    "$libjpeg_turbo_dir/src/jdcolor.c",
+    "$libjpeg_turbo_dir/src/jddiffct.c",
+    "$libjpeg_turbo_dir/src/jdlossls.c",
+    "$libjpeg_turbo_dir/src/jdmainct.c",
+    "$libjpeg_turbo_dir/src/jdpostct.c",
+    "$libjpeg_turbo_dir/src/jdsample.c",
+    "$libjpeg_turbo_dir/src/jutils.c",
   ]
 
   libjpeg12_sources = libjpeg16_sources + [
-                        "../externals/libjpeg-turbo/src/jccoefct.c",
-                        "../externals/libjpeg-turbo/src/jcdctmgr.c",
-                        "../externals/libjpeg-turbo/src/jdcoefct.c",
-                        "../externals/libjpeg-turbo/src/jddctmgr.c",
-                        "../externals/libjpeg-turbo/src/jdmerge.c",
-                        "../externals/libjpeg-turbo/src/jfdctfst.c",
-                        "../externals/libjpeg-turbo/src/jfdctint.c",
-                        "../externals/libjpeg-turbo/src/jidctflt.c",
-                        "../externals/libjpeg-turbo/src/jidctfst.c",
-                        "../externals/libjpeg-turbo/src/jidctint.c",
-                        "../externals/libjpeg-turbo/src/jidctred.c",
-                        "../externals/libjpeg-turbo/src/jquant1.c",
-                        "../externals/libjpeg-turbo/src/jquant2.c",
+                        "$libjpeg_turbo_dir/src/jccoefct.c",
+                        "$libjpeg_turbo_dir/src/jcdctmgr.c",
+                        "$libjpeg_turbo_dir/src/jdcoefct.c",
+                        "$libjpeg_turbo_dir/src/jddctmgr.c",
+                        "$libjpeg_turbo_dir/src/jdmerge.c",
+                        "$libjpeg_turbo_dir/src/jfdctfst.c",
+                        "$libjpeg_turbo_dir/src/jfdctint.c",
+                        "$libjpeg_turbo_dir/src/jidctflt.c",
+                        "$libjpeg_turbo_dir/src/jidctfst.c",
+                        "$libjpeg_turbo_dir/src/jidctint.c",
+                        "$libjpeg_turbo_dir/src/jidctred.c",
+                        "$libjpeg_turbo_dir/src/jquant1.c",
+                        "$libjpeg_turbo_dir/src/jquant2.c",
                       ]
 
   libjpeg_sources = libjpeg12_sources + [
-                      "../externals/libjpeg-turbo/src/jaricom.c",
-                      "../externals/libjpeg-turbo/src/jcapimin.c",
-                      "../externals/libjpeg-turbo/src/jcarith.c",
-                      "../externals/libjpeg-turbo/src/jchuff.c",
-                      "../externals/libjpeg-turbo/src/jcicc.c",
-                      "../externals/libjpeg-turbo/src/jcinit.c",
-                      "../externals/libjpeg-turbo/src/jclhuff.c",
-                      "../externals/libjpeg-turbo/src/jcmarker.c",
-                      "../externals/libjpeg-turbo/src/jcmaster.c",
-                      "../externals/libjpeg-turbo/src/jcomapi.c",
-                      "../externals/libjpeg-turbo/src/jcparam.c",
-                      "../externals/libjpeg-turbo/src/jcphuff.c",
-                      "../externals/libjpeg-turbo/src/jctrans.c",
-                      "../externals/libjpeg-turbo/src/jdapimin.c",
-                      "../externals/libjpeg-turbo/src/jdarith.c",
-                      "../externals/libjpeg-turbo/src/jdatadst.c",
-                      "../externals/libjpeg-turbo/src/jdatasrc.c",
-                      "../externals/libjpeg-turbo/src/jdhuff.c",
-                      "../externals/libjpeg-turbo/src/jdicc.c",
-                      "../externals/libjpeg-turbo/src/jdinput.c",
-                      "../externals/libjpeg-turbo/src/jdlhuff.c",
-                      "../externals/libjpeg-turbo/src/jdmarker.c",
-                      "../externals/libjpeg-turbo/src/jdmaster.c",
-                      "../externals/libjpeg-turbo/src/jdphuff.c",
-                      "../externals/libjpeg-turbo/src/jdtrans.c",
-                      "../externals/libjpeg-turbo/src/jerror.c",
-                      "../externals/libjpeg-turbo/src/jfdctflt.c",
-                      "../externals/libjpeg-turbo/src/jmemmgr.c",
-                      "../externals/libjpeg-turbo/src/jmemnobs.c",
-                      "../externals/libjpeg-turbo/src/jpeg_nbits.c",
+                      "$libjpeg_turbo_dir/src/jaricom.c",
+                      "$libjpeg_turbo_dir/src/jcapimin.c",
+                      "$libjpeg_turbo_dir/src/jcarith.c",
+                      "$libjpeg_turbo_dir/src/jchuff.c",
+                      "$libjpeg_turbo_dir/src/jcicc.c",
+                      "$libjpeg_turbo_dir/src/jcinit.c",
+                      "$libjpeg_turbo_dir/src/jclhuff.c",
+                      "$libjpeg_turbo_dir/src/jcmarker.c",
+                      "$libjpeg_turbo_dir/src/jcmaster.c",
+                      "$libjpeg_turbo_dir/src/jcomapi.c",
+                      "$libjpeg_turbo_dir/src/jcparam.c",
+                      "$libjpeg_turbo_dir/src/jcphuff.c",
+                      "$libjpeg_turbo_dir/src/jctrans.c",
+                      "$libjpeg_turbo_dir/src/jdapimin.c",
+                      "$libjpeg_turbo_dir/src/jdarith.c",
+                      "$libjpeg_turbo_dir/src/jdatadst.c",
+                      "$libjpeg_turbo_dir/src/jdatasrc.c",
+                      "$libjpeg_turbo_dir/src/jdhuff.c",
+                      "$libjpeg_turbo_dir/src/jdicc.c",
+                      "$libjpeg_turbo_dir/src/jdinput.c",
+                      "$libjpeg_turbo_dir/src/jdlhuff.c",
+                      "$libjpeg_turbo_dir/src/jdmarker.c",
+                      "$libjpeg_turbo_dir/src/jdmaster.c",
+                      "$libjpeg_turbo_dir/src/jdphuff.c",
+                      "$libjpeg_turbo_dir/src/jdtrans.c",
+                      "$libjpeg_turbo_dir/src/jerror.c",
+                      "$libjpeg_turbo_dir/src/jfdctflt.c",
+                      "$libjpeg_turbo_dir/src/jmemmgr.c",
+                      "$libjpeg_turbo_dir/src/jmemnobs.c",
+                      "$libjpeg_turbo_dir/src/jpeg_nbits.c",
                     ]
 
   static_library("libjpeg16") {
@@ -130,8 +131,8 @@ if (skia_use_system_libjpeg_turbo) {
   third_party("libjpeg") {
     public_include_dirs = [
       ".",
-      "../externals/libjpeg-turbo",
-      "../externals/libjpeg-turbo/src",
+      "$libjpeg_turbo_dir",
+      "$libjpeg_turbo_dir/src",
     ]
 
     defines = [
@@ -162,30 +163,30 @@ if (skia_use_system_libjpeg_turbo) {
         "WITH_SIMD",
       ]
       sources += [
-        "../externals/libjpeg-turbo/simd/arm/jccolor-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jcgray-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jcphuff-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jcsample-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jdcolor-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jdmerge-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jdsample-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jfdctfst-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jfdctint-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jidctfst-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jidctint-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jidctred-neon.c",
-        "../externals/libjpeg-turbo/simd/arm/jquanti-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jccolor-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jcgray-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jcphuff-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jcsample-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jdcolor-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jdmerge-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jdsample-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jfdctfst-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jfdctint-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jidctfst-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jidctint-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jidctred-neon.c",
+        "$libjpeg_turbo_dir/simd/arm/jquanti-neon.c",
       ]
-      include_dirs = [ "../externals/libjpeg-turbo/simd/arm" ]
+      include_dirs = [ "$libjpeg_turbo_dir/simd/arm" ]
       if (current_cpu == "arm") {
         sources += [
-          "../externals/libjpeg-turbo/simd/arm/aarch32/jchuff-neon.c",
-          "../externals/libjpeg-turbo/simd/arm/aarch32/jsimd.c",
+          "$libjpeg_turbo_dir/simd/arm/aarch32/jchuff-neon.c",
+          "$libjpeg_turbo_dir/simd/arm/aarch32/jsimd.c",
         ]
       } else if (current_cpu == "arm64") {
         sources += [
-          "../externals/libjpeg-turbo/simd/arm/aarch64/jchuff-neon.c",
-          "../externals/libjpeg-turbo/simd/arm/aarch64/jsimd.c",
+          "$libjpeg_turbo_dir/simd/arm/aarch64/jchuff-neon.c",
+          "$libjpeg_turbo_dir/simd/arm/aarch64/jsimd.c",
         ]
       }
     }
